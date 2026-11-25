@@ -1,0 +1,19 @@
+# Secretos: NUNCA se suben
+.env
+*.env
+!.env.example
+
+# Entorno y cachés de Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Base vectorial generada (se regenera con: python -m app.ingesta)
+chroma_db/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
