@@ -1,0 +1,306 @@
+[
+ {
+  "pregunta": "Soy hombre, peso 80 kg, mido 180 cm y tengo 25 años. Entreno 4 días a la semana. ¿Cuántas calorías y macros necesito para ganar músculo?",
+  "eventos": [
+   {
+    "tipo": "inicio"
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "calculadora",
+    "tarea": "Calcular TMB, TDEE, calorías objetivo y macros (proteína, grasa, carbohidratos) para un hombre de 80 kg, 180 cm, 25 años, 4 días de entrenamiento por semana, objetivo de ganancia muscular."
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "calculadora",
+    "herramienta": "calcular_tmb",
+    "args": {
+     "altura_cm": 180,
+     "edad": 25,
+     "peso_kg": 80,
+     "sexo": "hombre"
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "calculadora",
+    "herramienta": "calcular_tmb",
+    "resultado": "1805.0",
+    "fuentes": []
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "calculadora",
+    "herramienta": "calcular_tdee",
+    "args": {
+     "dias_entrenamiento_semana": 4,
+     "tmb": 1805
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "calculadora",
+    "herramienta": "calcular_tdee",
+    "resultado": "{\"tdee_kcal\": 2798, \"factor_actividad\": 1.55}",
+    "fuentes": []
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "calculadora",
+    "herramienta": "calcular_calorias_objetivo",
+    "args": {
+     "objetivo": "volumen",
+     "tdee": 2798
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "calculadora",
+    "herramienta": "calcular_calorias_objetivo",
+    "resultado": "3098",
+    "fuentes": []
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "calculadora",
+    "herramienta": "calcular_macros",
+    "args": {
+     "calorias": 3098,
+     "objetivo": "volumen",
+     "peso_kg": 80
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "calculadora",
+    "herramienta": "calcular_macros",
+    "resultado": "{\"calorias\": 3098, \"proteina_g\": 144, \"grasa_g\": 72, \"hidratos_g\": 468, \"proteina_g_por_kg\": 1.8, \"grasa_g_por_kg\": 0.9}",
+    "fuentes": []
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "FIN",
+    "tarea": ""
+   },
+   {
+    "tipo": "redactado"
+   },
+   {
+    "tipo": "verificacion",
+    "sin_respaldo": [],
+    "omitida": false
+   },
+   {
+    "tipo": "respuesta",
+    "texto": "Aquí tienes tu plan exacto para ganar masa muscular (volumen):\n\n*   **Calorías:** **3.098 kcal/día**\n*   **Proteína:** **144 g** (1,8 g/kg)\n*   **Grasa:** **72 g** (0,9 g/kg)\n*   **Hidratos:** **468 g**\n\nEstas cifras se basan en tu TMB de 1.805 kcal y un TDEE de 2.798 kcal, añadiendo un superávit de 300 kcal. Come unas 3.100 kcal al día repartidas en esos macros para apoyar tu ganancia de masa. (calculadora)"
+   }
+  ]
+ },
+ {
+  "pregunta": "¿Cuántas series por semana necesito para el pecho y cuánto debo descansar entre series?",
+  "eventos": [
+   {
+    "tipo": "inicio"
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "documentalista",
+    "tarea": "¿Cuántas series por semana necesito para el pecho y cuánto debo descansar entre series?"
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "documentalista",
+    "herramienta": "buscar_apuntes",
+    "args": {
+     "consulta": "series por semana pecho descanso entre series"
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "documentalista",
+    "herramienta": "buscar_apuntes",
+    "resultado": "[Fuente: entrenamiento_hipertrofia.md]\n## Volumen semanal por grupo muscular\nEl volumen se mide en series efectivas por grupo muscular y semana. Las revisiones divulgativas sitúan el mínimo útil en torno a 10 series semanales por grupo. El rango más citado para progresar bien es de 12 a 20 series semanales. Por encima de unas 20-22 series, cada serie extra aporta cada vez menos. Los principiantes progresan con volúmenes en la parte baja del rango. Los avanzados suelen necesitar más. Se recomiendan 2-3 series por ejercicio.\n\n[Fuente: entrenamiento_hipertrofia.md]\n## Frecuencia\nEntrenar cada gru",
+    "fuentes": [
+     "entrenamiento_hipertrofia.md",
+     "recuperacion_sueno.md"
+    ]
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "FIN",
+    "tarea": ""
+   },
+   {
+    "tipo": "redactado"
+   },
+   {
+    "tipo": "verificacion",
+    "sin_respaldo": [],
+    "omitida": false
+   },
+   {
+    "tipo": "respuesta",
+    "texto": "Para progresar bien en el pecho, el rango recomendado es de **12 a 20 series semanales**. El mínimo útil es de **10 series**, aunque por encima de **20-22** cada serie extra aporta menos beneficio. Si haces **16 series**, es mejor repartirlas en dos sesiones de **8**.\n\nSobre el descanso entre series:\n*   Para ejercicios pesados y multiarticulares: **2 a 3 minutos**.\n*   Para aislamientos: **60-90 segundos**.\n\nDescansar poco no hace crecer más el músculo y suele reducir las repeticiones de las series siguientes (entrenamiento_hipertrofia.md)."
+   }
+  ]
+ },
+ {
+  "pregunta": "Hago 100 kg x 5 repeticiones en press banca. ¿Cuál es mi 1RM estimado y qué discos pongo para 100 kg?",
+  "eventos": [
+   {
+    "tipo": "inicio"
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "calculadora",
+    "tarea": "Calcula el 1RM estimado a partir de 100 kg x 5 repeticiones en press banca, y calcula qué discos se necesitan para cargar 100 kg en la barra (peso total de la barra 20 kg)."
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "calculadora",
+    "herramienta": "estimar_1rm",
+    "args": {
+     "peso_kg": 100,
+     "repeticiones": 5
+    }
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "calculadora",
+    "herramienta": "calcular_discos",
+    "args": {
+     "peso_barra_kg": 20,
+     "peso_total_kg": 100
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "calculadora",
+    "herramienta": "estimar_1rm",
+    "resultado": "116.7",
+    "fuentes": []
+   },
+   {
+    "tipo": "resultado",
+    "agente": "calculadora",
+    "herramienta": "calcular_discos",
+    "resultado": "{\"discos_por_lado_kg\": [25, 15], \"peso_conseguido_kg\": 100.0, \"sobrante_por_lado_kg\": 0.0}",
+    "fuentes": []
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "FIN",
+    "tarea": ""
+   },
+   {
+    "tipo": "redactado"
+   },
+   {
+    "tipo": "verificacion",
+    "sin_respaldo": [],
+    "omitida": false
+   },
+   {
+    "tipo": "respuesta",
+    "texto": "Tu **1RM estimado** en press banca es de **116,7 kg** (calculado con la fórmula de Epley a partir de 100 kg × 5 reps).\n\nPara cargar **100 kg** en una barra de 20 kg, necesitas añadir **80 kg** en total (**40 kg por lado**).\n\nLa configuración exacta por lado es:\n*   **1 disco de 25 kg**\n*   **1 disco de 15 kg**\n\nEsto suma exactamente **100,0 kg** de peso total, sin sobras. (calculadora)"
+   }
+  ]
+ },
+ {
+  "pregunta": "¿Cuánta creatina tengo que tomar y hace falta hacer fase de carga?",
+  "eventos": [
+   {
+    "tipo": "inicio"
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "documentalista",
+    "tarea": "¿Cuánta creatina tengo que tomar y hace falta hacer fase de carga?"
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "documentalista",
+    "herramienta": "buscar_apuntes",
+    "args": {
+     "consulta": "dosis creatina fase de carga"
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "documentalista",
+    "herramienta": "buscar_apuntes",
+    "resultado": "[Fuente: suplementos.md]\nEs el suplemento deportivo con más evidencia a favor. La dosis habitual para un adulto sano es de 3 a 5 g al día, todos los días, entrenes o no. Un meta-análisis de 2024 en adultos sanos menores de 50 años encontró que, combinada con entrenamiento de fuerza, mejora las adaptaciones de fuerza máxima frente al placebo. No hace falta una fase de carga (unos 20 g al día durante 5 días). La carga solo acelera la saturación: con 3-5 g diarios, el efecto es equivalente tras unas 4 semanas\n\n[Fuente: nutricion_macros.md]\nLa tasa metabólica basal (TMB) es la energía que gasta tu",
+    "fuentes": [
+     "ejercicios_y_rutinas.md",
+     "nutricion_macros.md",
+     "suplementos.md"
+    ]
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "FIN",
+    "tarea": ""
+   },
+   {
+    "tipo": "redactado"
+   },
+   {
+    "tipo": "verificacion",
+    "sin_respaldo": [],
+    "omitida": false
+   },
+   {
+    "tipo": "respuesta",
+    "texto": "**Dosis diaria:** **3 a 5 g** al día, todos los días, entrenes o no.\n\n**Fase de carga:** No es necesaria.\n\nLa carga (unos **20 g** al día durante **5 días**) solo acelera la saturación. Si tomas **3-5 g** diarios, el efecto es equivalente tras unas **4 semanas**.\n\n(suplementos.md)"
+   }
+  ]
+ },
+ {
+  "pregunta": "Llevo 3 semanas durmiendo mal y no progreso. ¿Qué hago?",
+  "eventos": [
+   {
+    "tipo": "inicio"
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "documentalista",
+    "tarea": "Explica cómo la falta de sueño afecta el progreso en culturismo y sugiere estrategias para mejorar la calidad del sueño."
+   },
+   {
+    "tipo": "herramienta",
+    "agente": "documentalista",
+    "herramienta": "buscar_apuntes",
+    "args": {
+     "consulta": "falta de sueño efecto progreso culturismo estrategias mejorar calidad del sueño"
+    }
+   },
+   {
+    "tipo": "resultado",
+    "agente": "documentalista",
+    "herramienta": "buscar_apuntes",
+    "resultado": "[Fuente: recuperacion_sueno.md]\n## Sueño\nDormir entre 7 y 9 horas por noche es una referencia razonable para un adulto que entrena. Dormir poco empeora la fuerza, la motivación y el control del apetito. Para dormir mejor: mantén horarios regulares, evita pantallas intensas justo antes de acostarte y no tomes cafeína a última hora de la tarde.\n\n[Fuente: recuperacion_sueno.md]\n## Señales de sobreentrenamiento\n- El rendimiento baja durante varias semanas.\n- Cansancio persistente, mal humor o falta de motivación.\n- Dolor muscular que no remite o dolor articular.\n- Pulso en reposo más alto de lo ha",
+    "fuentes": [
+     "recuperacion_sueno.md",
+     "suplementos.md"
+    ]
+   },
+   {
+    "tipo": "supervisor",
+    "siguiente": "FIN",
+    "tarea": ""
+   },
+   {
+    "tipo": "redactado"
+   },
+   {
+    "tipo": "verificacion",
+    "sin_respaldo": [],
+    "omitida": false
+   },
+   {
+    "tipo": "respuesta",
+    "texto": "Dormir poco empeora la fuerza, la motivación y el control del apetito, frenando tu progreso. La referencia razonable es dormir entre **7 y 9 horas** por noche (recuperacion_sueno.md).\n\nPara mejorar la calidad del sueño:\n- Mantén **horarios regulares**.\n- Evita **pantallas intensas** justo antes de acostarte.\n- No tomes cafeína a última hora de la tarde; evítala en las **6-8 horas** previas a dormir (recuperacion_sueno.md).\n\nUn sueño de mala calidad es una señal de sobreentrenamiento. En ese caso, reduce el volumen un **30-50 %** durante una semana y revisa el sueño y la comida (recuperacion_sueno.md)."
+   }
+  ]
+ }
+]

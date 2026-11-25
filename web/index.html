@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iron Coach · Chatbot de culturismo</title>
+  <meta name="description" content="Chatbot de culturismo con agentes LangGraph, RAG sobre ChromaDB y servidor MCP.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230b0b0c'/%3E%3Cpath d='M8 26h6v12H8zM14 22h6v20h-6zM44 22h6v20h-6zM50 26h6v12h-6zM20 30h24v4H20z' fill='%23e10600'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="marca">
+      <span class="marca-icono" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34"><path d="M6 26h6v12H6zM12 20h7v24h-7zM45 20h7v24h-7zM52 26h6v12h-6zM19 30h26v4H19z" fill="currentColor"/></svg>
+      </span>
+      <h1>IRON <span>COACH</span></h1>
+    </div>
+    <p class="lema">Entrenamiento · Nutrición · Suplementos. Con ciencia, sin humo.</p>
+    <div class="etiquetas" aria-label="Tecnologías">
+      <span>LangGraph</span><span>RAG · ChromaDB</span><span>MCP · FastMCP</span><span>Groq · Qwen 3.8</span>
+    </div>
+  </header>
+
+  <div id="aviso" class="aviso" hidden></div>
+
+  <main class="rejilla">
+    <section class="chat" aria-label="Conversación">
+      <div id="mensajes" class="mensajes" aria-live="polite">
+        <div class="msg bot">
+          <div class="burbuja">
+            <p><strong>Soy Iron Coach.</strong> Pregúntame por series y repeticiones, macros, creatina o recuperación.
+            También hago los cálculos: TMB, calorías, macros, 1RM y discos de la barra.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="sugerencias" class="sugerencias" aria-label="Preguntas de ejemplo"></div>
+
+      <form id="formulario" class="entrada" autocomplete="off">
+        <input id="texto" type="text" maxlength="600" placeholder="Escribe tu pregunta..." aria-label="Tu pregunta">
+        <button id="enviar" type="submit">ENVIAR</button>
+      </form>
+    </section>
+
+    <aside class="sala" aria-label="Sala de máquinas">
+      <h2>SALA DE MÁQUINAS</h2>
+      <p class="sala-sub">Así piensa el sistema, paso a paso.</p>
+
+      <ol class="pipeline" id="pipeline">
+        <li data-nodo="supervisor"><b>Supervisor</b><small>decide quién actúa</small></li>
+        <li data-nodo="documentalista"><b>Documentalista</b><small>RAG vía MCP</small></li>
+        <li data-nodo="calculadora"><b>Calculadora</b><small>herramientas de cálculo</small></li>
+        <li data-nodo="responder"><b>Respuesta</b><small>redacta con lo encontrado</small></li>
+        <li data-nodo="verificar"><b>Verificador</b><small>quita lo que no tenga respaldo</small></li>
+      </ol>
+
+      <h3>Registro</h3>
+      <div id="registro" class="registro">
+        <p class="vacio">Haz una pregunta y verás aquí cada herramienta que se ejecuta y las fuentes que se consultan.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="pie">
+    <p>Iron Coach ofrece información general y no sustituye a un médico, nutricionista ni entrenador cualificado.
+    Si tienes una lesión, una enfermedad o tomas medicación, consulta a un profesional.</p>
+    <p>Proyecto de Deep Learning · ICADE ·
+      <a id="enlace-repo" href="#" target="_blank" rel="noopener">Código en GitHub</a>
+      <span id="enlace-vivo-sep" hidden> · </span><a id="enlace-vivo" href="#" target="_blank" rel="noopener" hidden>Versión en vivo</a>
+    </p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
