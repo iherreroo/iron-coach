@@ -1,6 +1,6 @@
 name: Demo en GitHub Pages
 
-# Publica la carpeta web/ (modo demo con conversaciones pregrabadas).
+# Publica la carpeta web/ (modo demo con conversaciones grabadas).
 # Requiere: Settings > Pages > Source = "GitHub Actions".
 on:
   push:
@@ -18,16 +18,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  desplegar:
+  construir:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.despliegue.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web
+
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
       - id: despliegue
         uses: actions/deploy-pages@v4
