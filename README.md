@@ -8,8 +8,8 @@
 
 | | |
 |---|---|
-| 🌐 **Demo (sin instalar nada)** | _enlace de GitHub Pages: ver sección [Demo](#-demo)_ |
-| 🔴 **Versión en vivo** | _enlace del despliegue: ver sección [Despliegue](#-despliegue-versión-en-vivo)_ |
+| 🌐 **Demo (sin instalar nada)** | <https://iherreroo.github.io/iron-coach/> |
+| 🔴 **Chat con el modelo real** | Se ejecuta en local ([instrucciones](#-ejecutarlo-en-local)); no hay instancia pública gratuita, ver [Despliegue](#-despliegue-versión-en-vivo) |
 
 ---
 
@@ -100,15 +100,13 @@ El servidor MCP también se puede usar desde otras aplicaciones, por ejemplo **C
 
 ## ☁️ Despliegue (versión en vivo)
 
-El proyecto incluye un [`Dockerfile`](Dockerfile) listo para **Hugging Face Spaces** (SDK *Docker*, gratis). La ingesta se ejecuta durante el *build*, así que el contenedor arranca con la base vectorial lista.
+El proyecto incluye un [`Dockerfile`](Dockerfile) (puerto 7860, compatible con **Hugging Face Spaces**). La ingesta se ejecuta durante el *build*, así que el contenedor arranca con la base vectorial lista. En cualquier plataforma que ejecute Docker, la única variable obligatoria es el secreto **`GROQ_API_KEY`**; nunca debe estar en el repositorio (`.env` está en `.gitignore`).
 
-1. Crea un Space (SDK **Docker**) en Hugging Face.
-2. Sube este repositorio al Space.
-3. En *Settings → Variables and secrets* añade el secreto **`GROQ_API_KEY`**.
+**Requisitos reales de hosting (medidos):** la app ocupa unos 280 MB en reposo y unos **900 MB** tras la primera pregunta libre, porque el servidor MCP carga entonces el modelo de embeddings. Por eso los planes gratuitos de 512 MB no son suficientes.
 
-La clave solo vive como secreto del Space: nunca está en el repositorio (`.env` está en `.gitignore`).
+**Situación actual de la versión en vivo:** a fecha de noviembre de 2026, Hugging Face solo permite crear Spaces *Docker* con una suscripción PRO (los Spaces estáticos siguen siendo gratuitos, pero no ejecutan Python). Por eso este repositorio publica gratis la **demo estática** en GitHub Pages y el chat con el modelo real se ejecuta en local. Si dispones de un hosting con ≥1 GB de RAM, basta con construir la imagen y definir `GROQ_API_KEY`.
 
-**Protecciones de la demo en vivo**: límite de preguntas por IP (`MAX_PETICIONES`, 20 cada 10 min), máximo 2 peticiones simultáneas y mensajes de hasta 600 caracteres, para no agotar el plan gratuito de Groq.
+**Protecciones de la demo en vivo**: límite de preguntas por IP (`MAX_PETICIONES`, 20 cada 10 min), las preguntas libres se atienden de una en una y mensajes de hasta 600 caracteres, para no agotar el plan gratuito de Groq.
 
 ## 📁 Estructura
 
@@ -150,7 +148,7 @@ Para añadir conocimiento, crea un `.md` en `conocimiento/` y vuelve a ejecutar 
 - **No es consejo médico.** Iron Coach no sustituye a un médico, nutricionista ni entrenador. No recomienda esteroides ni sustancias dopantes.
 - La base de conocimiento es pequeña (5 documentos): si algo no está, el sistema debe decirlo en lugar de inventarlo, pero un LLM puede equivocarse.
 - Las ecuaciones (Mifflin-St Jeor, Epley) son estimaciones con un margen de error.
-- **Límites del plan gratuito de Groq.** Cada modelo tiene su propio cupo (en las pruebas: 8.000 tokens por minuto y 200.000 al día) y una pregunta cuesta unos miles de tokens. Si se agota, la web lo indica. Para que la demo no dependa de la cuota, las preguntas sugeridas se sirven desde la caché, y el servidor limita las preguntas libres por IP.
+- **Límites del plan gratuito de Groq.** Cada modelo tiene su propio cupo (en las pruebas: 8.000 tokens por minuto y 200.000 al día) y una pregunta cuesta unos miles de tokens. Si se agota, la web lo indica. Según lo observado en las cabeceras de respuesta de Groq (pueden cambiar): el cupo por minuto se recupera en segundos y el diario funciona como una ventana móvil, no como un reinicio a una hora fija; tras agotarlo, Groq indicó esperar unos minutos y la cuota se va liberando poco a poco. Para que la demo no dependa de la cuota, las preguntas sugeridas se sirven desde la caché, y el servidor limita las preguntas libres por IP.
 - **Cambio de modelo.** El proyecto empezó con Llama 3.3 70B, pero Groq lo retiró de su plan gratuito. Hoy usa `qwen3.8-27b` (supervisor, agentes y respuesta) y `gpt-oss-20b` (verificador). Se cambian con `MODELO` y `MODELO_LIGERO` en `.env`.
 - Los modelos gratuitos fallan de vez en cuando al generar una llamada a herramienta: el grafo reintenta automáticamente y, si el verificador no puede completarse, lo indica en lugar de decir que todo está respaldado.
 
